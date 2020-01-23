@@ -22,7 +22,7 @@ namespace Game1
         //Texture Variables
         VertexPositionTexture[] textureVertices;
         BasicEffect textureEffect;
-        Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-10,0,0);
+        Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-2, 0, 0);
         Texture2D texture;
 
         //Camera
@@ -48,14 +48,14 @@ namespace Game1
             Updateview();
 
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90),
-            GraphicsDevice.DisplayMode.AspectRatio,0.1f, 1000);
+            GraphicsDevice.DisplayMode.AspectRatio, 0.1f, 1000);
 
             base.Initialize();
         }
 
         void Updateview()
         {
-            view = Matrix.CreateLookAt(new Vector3(0,0,10), new Vector3(0,0,-1), Vector3.Up);
+            view = Matrix.CreateLookAt(new Vector3(0, 0, 5), new Vector3(0, 0, -1), Vector3.Up);
 
         }
 
@@ -80,12 +80,13 @@ namespace Game1
             textureVertices = new VertexPositionTexture[3];
 
             //insatiable the 3 vertices -> position and colour 
-            textureVertices[0] = new VertexPositionTexture(new Vector3(1, 0, 0),new Vector2(1,0));//BR
-            textureVertices[1] = new VertexPositionTexture(new Vector3(-1, 0, 0), new Vector2(-1, 0));//BR
-            textureVertices[2] = new VertexPositionTexture(new Vector3(0, 1, 0), new Vector2(0, 1));//BR
+            textureVertices[0] = new VertexPositionTexture(new Vector3(1, 0, 0), new Vector2(1, 1));//BR
+            textureVertices[1] = new VertexPositionTexture(new Vector3(-1, 0, 0), new Vector2(0, 1));//BR
+            textureVertices[2] = new VertexPositionTexture(new Vector3(0, 1, 0), new Vector2(.5f, .5f));//BR
 
             textureEffect = new BasicEffect(GraphicsDevice);
-            textureEffect.VertexColorEnabled = true;
+            textureEffect.TextureEnabled = true;
+            textureEffect.Texture = texture;
         }
         protected override void LoadContent()
         {
@@ -106,12 +107,16 @@ namespace Game1
             base.Update(gameTime);
 
             Updateview();
+
+            textureWorld *= Matrix.CreateRotationY(MathHelper.ToRadians(.5f));
         }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             DrawColourTriangle();
+            DrawTextureTriangle();
+            
 
             base.Draw(gameTime);
         }
@@ -132,7 +137,34 @@ namespace Game1
                 //send the data
                 GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, colourVertices,
                     0, colourVertices.Length / 3);
+
+
+
+            }
+        }
+
+            private void DrawTextureTriangle()
+            {
+                //pass data from C# to GPU(HLSL)
+                textureEffect.World = textureWorld;
+                textureEffect.View = view;
+                textureEffect.Projection = projection;
+
+                //foreach pass (method) in the shader.....
+                foreach (EffectPass pass in textureEffect.CurrentTechnique.Passes)
+                {
+                    //apply the pass to the vertices (call the method)
+                    pass.Apply();
+
+                    //send the data
+                    GraphicsDevice.DrawUserPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, textureVertices,
+                        0, textureVertices.Length / 3);
+
+
+
+                }
             }
         }
     }
-}
+
+
