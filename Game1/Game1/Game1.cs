@@ -16,6 +16,19 @@ namespace Game1
         VertexPositionColor[] colourVertices;
         //shader used to render the vertices
         BasicEffect colorEffect;
+        //how is the triangle transformed 
+        Matrix colourWorld = Matrix.Identity;
+
+        //Texture Variables
+        VertexPositionTexture[] textureVertices;
+        BasicEffect textureEffect;
+        Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-10,0,0);
+        Texture2D texture;
+
+        //Camera
+        Matrix view; //where are we? Where are we looking?
+        Matrix projection; // Field of view, near and far plane, aspect ratio
+
 
         public Game1()
         {
@@ -31,7 +44,19 @@ namespace Game1
 
         protected override void Initialize()
         {
+
+            Updateview();
+
+            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90),
+            GraphicsDevice.DisplayMode.AspectRatio,0.1f, 1000);
+
             base.Initialize();
+        }
+
+        void Updateview()
+        {
+            view = Matrix.CreateLookAt(new Vector3(0,0,10), new Vector3(0,0,-1), Vector3.Up);
+
         }
 
         void CreateColourVertices()
@@ -46,6 +71,21 @@ namespace Game1
 
             colorEffect = new BasicEffect(GraphicsDevice);
             colorEffect.VertexColorEnabled = true;
+        }
+
+        void CreateTextureVertices()
+        {
+            texture = Content.Load<Texture2D>("uv_texture");
+            //create the array
+            textureVertices = new VertexPositionTexture[3];
+
+            //insatiable the 3 vertices -> position and colour 
+            textureVertices[0] = new VertexPositionTexture(new Vector3(1, 0, 0),new Vector2(1,0));//BR
+            textureVertices[1] = new VertexPositionTexture(new Vector3(-1, 0, 0), new Vector2(-1, 0));//BR
+            textureVertices[2] = new VertexPositionTexture(new Vector3(0, 1, 0), new Vector2(0, 1));//BR
+
+            textureEffect = new BasicEffect(GraphicsDevice);
+            textureEffect.VertexColorEnabled = true;
         }
         protected override void LoadContent()
         {
@@ -64,12 +104,35 @@ namespace Game1
                 Exit();
 
             base.Update(gameTime);
+
+            Updateview();
         }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            DrawColourTriangle();
+
             base.Draw(gameTime);
+        }
+
+        private void DrawColourTriangle()
+        {
+            //pass data from C# to GPU(HLSL)
+            colorEffect.World = colourWorld;
+            colorEffect.View = view;
+            colorEffect.Projection = projection;
+
+            //foreach pass (method) in the shader.....
+            foreach (EffectPass pass in colorEffect.CurrentTechnique.Passes)
+            {
+                //apply the pass to the vertices (call the method)
+                pass.Apply();
+
+                //send the data
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, colourVertices,
+                    0, colourVertices.Length / 3);
+            }
         }
     }
 }
