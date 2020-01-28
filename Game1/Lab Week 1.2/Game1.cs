@@ -20,6 +20,8 @@ namespace Lab_Week_1._2
         //How is the triangle transformed?
         Matrix colorWorld = Matrix.Identity;
 
+        
+
         //Texture Vertices
         VertexPositionTexture[] textureVertices;
         BasicEffect textureEffect;
@@ -79,24 +81,40 @@ namespace Lab_Week_1._2
         void CreateColorVertices()
         {
             //create the array
-            colorVertices = new VertexPositionColor[9];
+            colorVertices = new VertexPositionColor[3];
 
             //instantiate the 3 vertices -> position and color
 
             //triangle 1
-            colorVertices[0] = new VertexPositionColor(new Vector3(-2, -1, 0), Color.Red);//BL
-            colorVertices[1] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Red);//TL
-            colorVertices[2] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Red);//BR
+            colorVertices[0] = new VertexPositionColor(new Vector3(1, 1, -1), Color.Red);//BL
+            colorVertices[1] = new VertexPositionColor(new Vector3(-1, -1, -1), Color.Red);//TL
+            colorVertices[2] = new VertexPositionColor(new Vector3(-1, 1, -1), Color.Red);//BR
 
-            //traingle 2
-            colorVertices[3] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Green);//BL
-            colorVertices[4] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Green);//TL
-            colorVertices[5] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Green);//BR
+            ////traingle 2
+            //colorVertices[3] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Green);//BL
+            //colorVertices[4] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Green);//TL
+            //colorVertices[5] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Green);//BR
 
-            //triangle 3
-            colorVertices[6] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Blue);//BL
-            colorVertices[7] = new VertexPositionColor(new Vector3(-2, -1, 0), Color.Blue);//TL
-            colorVertices[8] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Blue);//BR
+            ////triangle 3
+            //colorVertices[6] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Blue);//BL
+            //colorVertices[7] = new VertexPositionColor(new Vector3(-2, -1, 0), Color.Blue);//TL
+            //colorVertices[8] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Blue);//BR
+
+            //3d triangle
+            ////triangle 1
+            //colorVertices[0] = new VertexPositionColor(new Vector3(-2, -1, 0), Color.Red);//BL
+            //colorVertices[1] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Red);//TL
+            //colorVertices[2] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Red);//BR
+
+            ////traingle 2
+            //colorVertices[3] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Green);//BL
+            //colorVertices[4] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Green);//TL
+            //colorVertices[5] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Green);//BR
+
+            ////triangle 3
+            //colorVertices[6] = new VertexPositionColor(new Vector3(0, 2, -1), Color.Blue);//BL
+            //colorVertices[7] = new VertexPositionColor(new Vector3(-2, -1, 0), Color.Blue);//TL
+            //colorVertices[8] = new VertexPositionColor(new Vector3(0, -1, -3), Color.Blue);//BR
 
             ////traingle 4
             //colorVertices[9] = new VertexPositionColor(new Vector3(-1, -1, 0), Color.Red);//BL
