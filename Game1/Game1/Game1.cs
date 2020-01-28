@@ -24,7 +24,7 @@ namespace Game1
         BasicEffect textureEffect;
         Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-2, 0, 0);
         Texture2D texture;
-
+        
         //Camera
         Matrix view; //where are we? Where are we looking?
         Matrix projection; // Field of view, near and far plane, aspect ratio

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1.csproj", "{09AF3235-F27C-4C88-B4C1-A97C1434D817}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab Week 1.2", "Lab Week 1.2\Lab Week 1.2.csproj", "{7CC0183D-4DF2-4C57-B43E-C08BB4DEA6E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{09AF3235-F27C-4C88-B4C1-A97C1434D817}.Debug|x86.Build.0 = Debug|x86
 		{09AF3235-F27C-4C88-B4C1-A97C1434D817}.Release|x86.ActiveCfg = Release|x86
 		{09AF3235-F27C-4C88-B4C1-A97C1434D817}.Release|x86.Build.0 = Release|x86
+		{7CC0183D-4DF2-4C57-B43E-C08BB4DEA6E9}.Debug|x86.ActiveCfg = Debug|x86
+		{7CC0183D-4DF2-4C57-B43E-C08BB4DEA6E9}.Debug|x86.Build.0 = Debug|x86
+		{7CC0183D-4DF2-4C57-B43E-C08BB4DEA6E9}.Release|x86.ActiveCfg = Release|x86
+		{7CC0183D-4DF2-4C57-B43E-C08BB4DEA6E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
