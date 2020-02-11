@@ -46,14 +46,14 @@ namespace Sample_Models
             {
                 foreach (BasicEffect effect in mesh.Effects)//mesges have effects and we need to set the properties of the feffect before drawing the verices
                 {
-                    effect.World = bonesTransforms(mesh.ParentBone.Index) * world; //where the object is in the game
+                    //effect.World = bonesTransforms(mesh.ParentBone.Index) * world; //where the object is in the game
                     effect.View = view;//where the camera is facing and what direction is it looking in
                     effect.Projection = projection;//details of the window the game is being rendered to (apsect ratio, POV)
                     effect.EnableDefaultLighting();
                 }
                 mesh.Draw(); //send the vertices to the GPU and the effect to render them
             }
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
     }
 }
