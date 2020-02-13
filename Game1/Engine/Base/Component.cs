@@ -9,6 +9,8 @@ namespace Engine.Base
     public abstract class Component
     {
 
+        public GameObject owner { get; set; }
+
         public string ID {get;set;}
         public bool Enabled { get; set; }
 
