@@ -25,7 +25,7 @@ namespace Lab_Week_1._2
         //Texture Vertices
         VertexPositionTexture[] textureVertices;
         BasicEffect textureEffect;
-        //Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-2, 0, 0);
+        Matrix textureWorld = Matrix.Identity * Matrix.CreateTranslation(-2, 0, 0);
         Texture2D texture;
 
         //Camera 
@@ -59,19 +59,19 @@ namespace Lab_Week_1._2
 
         void UpdateView()
         {
-            //view = Matrix.CreateLookAt(new Vector3(0, 0, 5), new Vector3(0, 0, -1), Vector3.Up);
+            view = Matrix.CreateLookAt(new Vector3(0, 0, 5), new Vector3(0, 0, -1), Vector3.Up);
         }
 
         void CreateTextureVertices()
         {
             texture = Content.Load<Texture2D>("uv_texture");
             //create the array
-            //textureVertices = new VertexPositionTexture[3];
+            textureVertices = new VertexPositionTexture[3];
 
             //instantiate the 3 vertices -> position and color
-            //textureVertices[0] = new VertexPositionTexture(new Vector3(1, 0, 0), new Vector2(1, 1));//BR
-            //textureVertices[1] = new VertexPositionTexture(new Vector3(-1, 0, 0), new Vector2(0, 1));//BL
-            //textureVertices[2] = new VertexPositionTexture(new Vector3(0, 1, 0), new Vector2(0.5f, 0.5f));//TOP
+            textureVertices[0] = new VertexPositionTexture(new Vector3(1, 0, 0), new Vector2(1, 1));//BR
+            textureVertices[1] = new VertexPositionTexture(new Vector3(-1, 0, 0), new Vector2(0, 1));//BL
+            textureVertices[2] = new VertexPositionTexture(new Vector3(0, 1, 0), new Vector2(0.5f, 0.5f));//TOP
 
             textureEffect = new BasicEffect(GraphicsDevice);
             textureEffect.TextureEnabled = true;
@@ -81,14 +81,14 @@ namespace Lab_Week_1._2
         void CreateColorVertices()
         {
             //create the array
-            //colorVertices = new VertexPositionColor[3];
+            colorVertices = new VertexPositionColor[3];
 
             //instantiate the 3 vertices -> position and color
 
             //triangle 1
-            //colorVertices[0] = new VertexPositionColor(new Vector3(1, 1, -1), Color.Red);//BL
-            //colorVertices[1] = new VertexPositionColor(new Vector3(-1, -1, -1), Color.Red);//TL
-            //colorVertices[2] = new VertexPositionColor(new Vector3(-1, 1, -1), Color.Red);//BR
+            colorVertices[0] = new VertexPositionColor(new Vector3(1, 1, -1), Color.Red);//BL
+            colorVertices[1] = new VertexPositionColor(new Vector3(-1, -1, -1), Color.Red);//TL
+            colorVertices[2] = new VertexPositionColor(new Vector3(-1, 1, -1), Color.Red);//BR
 
             ////traingle 2
             //colorVertices[3] = new VertexPositionColor(new Vector3(2, -1, 0), Color.Green);//BL
@@ -123,21 +123,21 @@ namespace Lab_Week_1._2
 
             short[] Indices = new short[12];
 
-            //Indices[0] = 0;
-            //Indices[1] = 1;
-            //Indices[2] = 2;
+            Indices[0] = 0;
+            Indices[1] = 1;
+            Indices[2] = 2;
 
-            //Indices[3] = 2;
-            //Indices[4] = 1;
-            //Indices[5] = 3;
+            Indices[3] = 2;
+            Indices[4] = 1;
+            Indices[5] = 3;
 
-            //Indices[6] = 0;
-            //Indices[7] = 0;
-            //Indices[8] = 0;
+            Indices[6] = 0;
+            Indices[7] = 0;
+            Indices[8] = 0;
 
-            //Indices[9] = 0;
-            //Indices[10] = 0;
-            //Indices[11] = 0;
+            Indices[9] = 0;
+            Indices[10] = 0;
+            Indices[11] = 0;
 
             colorEffect = new BasicEffect(GraphicsDevice);
             colorEffect.VertexColorEnabled = true;
@@ -193,18 +193,18 @@ namespace Lab_Week_1._2
             colorEffect.Projection = projection;
 
             //foreach pass (method) in the shader....
-            //foreach (EffectPass pass in colorEffect.CurrentTechnique.Passes)
-            //{
-            //    //apply the pass to the vertices (call the method)
-            //    pass.Apply();
+            foreach (EffectPass pass in colorEffect.CurrentTechnique.Passes)
+            {
+                //apply the pass to the vertices (call the method)
+                pass.Apply();
 
-            //    //send the data
-            //    GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-            //        PrimitiveType.TriangleList,
-            //        colorVertices,
-            //        0,
-            //        colorVertices.Length / 3);
-            //}
+                //send the data
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
+                    PrimitiveType.TriangleList,
+                    colorVertices,
+                    0,
+                    colorVertices.Length / 3);
+            }
         }
 
 
@@ -215,18 +215,18 @@ namespace Lab_Week_1._2
             textureEffect.View = view;
             textureEffect.Projection = projection;
 
-            //foreach (EffectPass pass in textureEffect.CurrentTechnique.Passes)
-            //{
-            //    //apply the pass to the vertices (call the method)
-            //    pass.Apply();
+            foreach (EffectPass pass in textureEffect.CurrentTechnique.Passes)
+            {
+                //apply the pass to the vertices (call the method)
+                pass.Apply();
 
-            //    //send the data
-            //    GraphicsDevice.DrawUserPrimitives<VertexPositionTexture>(
-            //        PrimitiveType.TriangleList,
-            //        textureVertices,
-            //        0,
-            //        textureVertices.Length / 3);
-            //}
+                //send the data
+                GraphicsDevice.DrawUserPrimitives<VertexPositionTexture>(
+                    PrimitiveType.TriangleList,
+                    textureVertices,
+                    0,
+                    textureVertices.Length / 3);
+            }
         }
     }
 }
