@@ -41,7 +41,7 @@ namespace Engine.Base
                 components[i].Intialize();
 
             }
-            isInitalized = true;
+            Initalized = true;
 
         }
 
